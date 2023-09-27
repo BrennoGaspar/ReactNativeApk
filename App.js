@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './screens/HomeScreen';
 import InitialScreen from './screens/InitialScreen';
+import TipsScreen from './screens/TipsScreen';
 /*import ReuseScreen from './screens/ReuseScreen';
 import EmissionScreen from './screens/EmissionScreen';
 
@@ -19,6 +20,7 @@ import EmissionScreen from './screens/EmissionScreen';
           options={{ headerShown: false }} 
         />
 */
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -31,9 +33,14 @@ function App() {
           options={{ headerShown: false }} // Aqui você desativa o header
         />
         <Stack.Screen 
-        name="Initial" 
-        component={InitialScreen}
-        options={{ headerShown: false }}
+          name="Initial" 
+          component={InitialScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Tips" 
+          component={TipsScreen}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

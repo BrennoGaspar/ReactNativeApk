@@ -1,91 +1,109 @@
-// HomeScreen.js
-
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import Dialog from "react-native-dialog";
+import { LinearGradient } from 'expo-linear-gradient';
 
-function ButtonPress({ navigation }) {
-  console.log('O usuário clicou no botão!');
-  alert('Está funcionando!');
-  navigation.navigate('Initial');
-}
+const frasesConscientizacao = [
+  "Mau descarte de lixo prejudica o meio ambiente.",
+  "Reciclar é uma forma de cuidar do nosso planeta.",
+  "Lixo no chão é um ato de desrespeito à natureza.",
+  "Reduza, reutilize e recicle para um mundo melhor.",
+  "Cuide do planeta como se não houvesse um segundo.",
+  "Lixo no mar afeta a vida marinha. Descarte corretamente!",
+  "A poluição começa com o mau descarte do lixo.",
+  "Seja um cidadão consciente, não jogue lixo nas ruas.",
+  "Preserve a beleza da natureza, descarte seu lixo corretamente.",
+  "Reciclar é um pequeno gesto que faz uma grande diferença."
+];
 
 function HomeScreen({ navigation }) {
+  const [isAlertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const showAlert = () => {
+    const randomIndex = Math.floor(Math.random() * frasesConscientizacao.length);
+    const randomFrase = frasesConscientizacao[randomIndex];
+    setAlertTitle("COLOQUE A MÃO NA CONSCIÊNCIA!");
+    setAlertMessage(randomFrase);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+    navigation.navigate('Initial');
+  };
+
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#175200', '#00a200']} // Cores do gradiente
+      style={styles.container}
+    >
+    <View style={styles.contentContainer}>
+      <Image
+        resizeMode="contain"
+        style={styles.containerimage}
+        source={require('../assets/logo.png')}
+      />
 
-      <ImageBackground
-        style={styles.containerbackground}
-        source={require('../assets/fundo.jpg')}>
+      {/* Texto de bem-vindo */}
+      <Text style={styles.containertext}>Bem-Vindo</Text>
 
-        <StatusBar style="auto"/>
+      {/* Botao Entrar */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.containerbutton}
+          onPress={showAlert}
+        >
+          <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.contentContainer}>
-          <Text style={styles.containertext}>BEM-VINDO!</Text>
-
-          <Image
-            style={styles.containerimage}
-            source={require('../assets/logo.png')}/>
-
-          <Text style={styles.nomeimage}>EcoGru</Text>
-
-          <TouchableOpacity
-            style={styles.containerbutton}
-            onPress={() => ButtonPress({ navigation })}>
-            <Text style={styles.buttonText}>Entrar</Text>
-          </TouchableOpacity>
-        </View>
-
-      </ImageBackground>
-
+      {/* Alert */}
+      <Dialog.Container visible={isAlertVisible}>
+        <Dialog.Title>{alertTitle}</Dialog.Title>
+        <Dialog.Description>{alertMessage}</Dialog.Description>
+        <Dialog.Button label="Fechar" onPress={closeAlert} />
+      </Dialog.Container>
     </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  containerbackground:{
-    width: '100%',
-    height: '100%',
-  },
   container: {
-    backgroundColor: 'green',
     flex: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    justifyContent: 'center', 
     alignItems: 'center',
-    marginBottom: '30%', 
-    marginTop: '30%', 
-  },
-  containertext: {
-    color:'white',
-    fontSize: 30,
-    fontWeight:"bold",
+    justifyContent: 'center',
   },
   containerimage:{
-    width: 200,
-    height: 200,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 200,
-    marginTop: '5%',
+    marginLeft: '20%',
   },
-  nomeimage: {
-    color:'white',
-    fontSize: 30,
-    fontWeight: "bold",
-    marginTop: '5%',
+  containertext: {
+    color: 'white',
+    fontSize: 50,
+    fontWeight: 'bold',
+    marginTop: '-20%',
+    marginLeft: '42%',
   },
   buttonText: {
     textAlign: 'center',
-    backgroundColor: '#CDBD43',
-    width: 130,
-    height: 40,
-    lineHeight: 40,
-    borderRadius: 5,
+    backgroundColor: '#d8ac14',
+    fontSize: 40,
+    width: 200,
+    height: 60,
+    lineHeight: 53,
+    borderRadius: 50,
     color: 'white',
     fontWeight: 'bold',
-    marginTop: '3%',
+    marginTop: '-40%',
+    marginLeft: '185%',
+  },
+  buttonContainer: {
+    alignItems: 'center', 
+    marginTop: '40%',    
+    width: 200,          
+    height: 60,
   },
 });
 

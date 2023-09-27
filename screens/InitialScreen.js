@@ -1,136 +1,145 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Linking, Alert } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
-import { Ionicons } from '@expo/vector-icons';
+import { View, StyleSheet, Text, TouchableOpacity, Linking, Alert, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 function InitialScreen({ navigation }) {
-  const [location, setLocation] = useState(null);
+
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
-    async function getLocationPermissionAndLocation() {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-
-      if (status !== 'granted') {
-        Alert.alert(
-          'Permissão negada!',
-          'É necessário aceitar a permissão.'
-        );
-        return;
-      }
-
-      let userLocation = await Location.getCurrentPositionAsync({});
-      setLocation(userLocation.coords);
-    }
-
-    getLocationPermissionAndLocation();
+    const date = new Date();
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    setCurrentDate(formattedDate);
   }, []);
 
-  const savedCoordinates = [
-    { latitude: -23.469533127118552, longitude: -46.53904119997559 },
-    { latitude: -23.475333, longitude: -46.545041 },
-    { latitude: -23.480555, longitude: -46.550555 },
-  ];
-
-  const visibleMarkers = savedCoordinates.slice(0, 2);
-
-  const handleRouteToMarker = (coordinate) => {
-    if (!location) {
-      Alert.alert('Localização não encontrada.', 'Por favor, espere enquanto procuramos sua localização.');
-      return;
-    }
-
-    const url = `https://www.google.com/maps/dir/?api=1&origin=${location.latitude},${location.longitude}&destination=${coordinate.latitude},${coordinate.longitude}`;
-    Linking.openURL(url);
-  };
-
   return (
-    <View style={styles.container}>
-      {location && (
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }}
-        >
-          <Marker
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}
-            title="Your Location"
-            pinColor="green"
-          />
-
-          {/* Render markers on the map */}
-          {visibleMarkers.map((coordinate, index) => (
-            <Marker
-              key={index}
-              coordinate={coordinate}
-              title={`Marker ${index + 1}`}
-            />
-          ))}
-        </MapView>
-      )}
-      <View style={styles.hudContainer}>
+    <LinearGradient
+      colors={['#175200', '#00a200']} // Cores do gradiente
+      style={styles.container}>
         
-        {/* Render buttons for each visible marker */}
-        {visibleMarkers.map((coordinate, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.hudButton}
-            onPress={() => handleRouteToMarker(coordinate)}
-          >
-            <Ionicons name="navigate-outline" size={24} color="white" />
-            <Text style={styles.buttonText}>Route to Marker {index + 1}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+    <View style={styles.contentContainer}>
+      <Image resizeMode="contain"
+        style={styles.containerimage}
+        source={require('../assets/logo.png')}/>
     </View>
+
+    <View style={styles.conteinerdata}>
+      <Text style={styles.data}>Dia {currentDate}</Text>
+    </View>
+
+    <View style={styles.conteinercategorias}>
+      <Text style={styles.categorias}>Categorias</Text>
+    </View>
+
+  <View style={styles.geral}>
+    <View style={styles.conteinerdicas}>
+      <TouchableOpacity onPress={()=>navigation.navigate('Tips')}>
+
+      <View style={styles.imagedicasex}>
+        <Image source={require('../assets/dicas.png')} style={styles.imagedicas}></Image>
+      </View>
+
+        <Text style={styles.textdicas}>Dicas de Reciclagem</Text>
+      </TouchableOpacity>
+    </View>
+
+    <View style={styles.conteinerpontos}>
+      <TouchableOpacity onPress={()=>navigation.navigate('PontosColeta')}>
+
+      <View style={styles.imagepontosex}>
+        <Image source={require('../assets/pontos.png')} style={styles.imagepontos}></Image>
+      </View>
+
+        <Text style={styles.textpontos}>Pontos de Coleta</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+
+    </LinearGradient>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  contentContainer: {
+    alignItems: 'center',
+  },
+  containerimage: {
+    width: 400,
+    height: 400,
+    marginTop: '-10%',
+    marginLeft: '10%',
+  },
+  conteinerdata:{
+    alignContent: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
+    width: '79%',
+    height: '7%',
+    backgroundColor: 'green',
+    marginLeft: '10%',
+    marginTop: '-20%',
+    borderRadius: 20,
   },
-  map: {
-    width: '100%',
-    height: '60%',
-    marginBottom: 10,
-  },
-  hudContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    paddingVertical: 10,
-  },
-  hudButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
+  data:{
     color: 'white',
-    marginTop: 5,
+    fontSize: 15,
   },
-  hudButtonNow: {
-    backgroundColor: 'red',
-    width: 55,
-    height: 60,
-    borderRadius: 30 / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+  conteinercategorias:{
+    marginTop: '10%',
+    marginBottom: '10%',
+    marginLeft: '10%',
+  },
+  categorias:{
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  geral:{
+    marginLeft: '5%',
+    marginRight: '5%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  imagedicasex:{
+    width: 150,
+    height: 150,
+    backgroundColor: 'green',
+    borderRadius: 100,
+  },
+  imagepontosex:{
+    width: 150,
+    height: 150,
+    backgroundColor: 'green',
+    borderRadius: 100,
+  },
+  imagedicas:{
+    width: 130,
+    height: 130,
+    marginLeft: '7%',
+    marginTop: '5%',
+  },
+  imagepontos:{
+    width: 130,
+    height: 130,
+    marginLeft: '7%',
+    marginTop: '5%',
+  },
+  textdicas:{
+    color: 'white',
+    marginLeft: '6%',
+    fontSize: 20,
+    width: '60%',
+    textAlign: 'center'
+  },
+  textpontos:{
+    color: 'white',
+    marginLeft: '10%',
+    fontSize: 20,
+    width: '60%',
+    textAlign: 'center'
   },
 });
 
