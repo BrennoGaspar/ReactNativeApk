@@ -5,21 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import InitialScreen from './screens/InitialScreen';
 import TipsScreen from './screens/TipsScreen';
-/*import ReuseScreen from './screens/ReuseScreen';
-import EmissionScreen from './screens/EmissionScreen';
+import MapScreen from './screens/MapScreen';
+import GopouvaScreen from './points/gopouva';
+import ParaventiScreen from './points/paraventi';
 
-
-<Stack.Screen
-          name="Reuse"
-          component={ReuseScreen}
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen
-          name="Emission"
-          component={EmissionScreen}
-          options={{ headerShown: false }} 
-        />
-*/
 
 const Stack = createStackNavigator();
 
@@ -40,6 +29,23 @@ function App() {
         <Stack.Screen 
           name="Tips" 
           component={TipsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Map" 
+          component={MapScreen}
+          options={{ headerShown: false }}
+        />
+
+
+        <Stack.Screen 
+          name="Gopouva" 
+          component={GopouvaScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Paraventi" 
+          component={ParaventiScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

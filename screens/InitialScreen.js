@@ -44,7 +44,7 @@ function InitialScreen({ navigation }) {
     </View>
 
     <View style={styles.conteinerpontos}>
-      <TouchableOpacity onPress={()=>navigation.navigate('PontosColeta')}>
+      <TouchableOpacity onPress={()=>navigation.navigate('Map')}>
 
       <View style={styles.imagepontosex}>
         <Image source={require('../assets/pontos.png')} style={styles.imagepontos}></Image>
