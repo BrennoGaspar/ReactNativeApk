@@ -47,22 +47,17 @@ function MapScreen({ navigation }) {
 
   useEffect(() => {
     if (location) {
-      // Calculate distances between user location and all saved coordinates
       const coordinatesWithDistance = savedCoordinates.map(coordinate => {
         const distance = getDistance(location.latitude, location.longitude, coordinate.latitude, coordinate.longitude);
         return { ...coordinate, distance };
       });
 
-      // Sort coordinates by distance (closest first)
       const sortedCoordinates = coordinatesWithDistance.sort((a, b) => a.distance - b.distance);
 
-      // Set the closest coordinates to state
       setClosestCoordinates(sortedCoordinates);
 
-      // Limit the number of closest coordinates to 3
       const limitedCoordinates = sortedCoordinates.slice(0, 3);
 
-      // Set the closest coordinates to state
       setLimitedCoordinates(limitedCoordinates);
     }
   }, [location]);
@@ -80,7 +75,7 @@ function MapScreen({ navigation }) {
     dist = Math.acos(dist);
     dist = (dist * 180) / Math.PI;
     dist = dist * 60 * 1.1515;
-    dist = dist * 1.609344; // Kilometers
+    dist = dist * 1.609344;
     return dist;
   };
 
@@ -201,7 +196,7 @@ const styles = StyleSheet.create({
     height: '20%',
     marginTop: '2%',
     backgroundColor: 'rgba(35, 142, 35, 0.7)',
-    borderRadius: 10, // Ajuste o raio da borda conforme desejado
+    borderRadius: 10,
   },  
   buttonText: {
     color: 'white',
