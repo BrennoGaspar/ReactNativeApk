@@ -32,7 +32,7 @@ function TipsScreen({ navigation }) {
         style={styles.container}
       >
         <View style={styles.containerbutton}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
+          <TouchableOpacity onPress={() => navigation.navigate('Initial')} style={styles.button}>
             <Text>❌</Text>
           </TouchableOpacity>
   
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
+    marginTop: '-5%',
   },
   button: {
     backgroundColor: 'transparent',

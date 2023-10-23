@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-function ParaventiScreen({ navigation }) {
+function TorresTibagyScreen({ navigation }) {
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function ParaventiScreen({ navigation }) {
   }, []);
 
   const savedCoordinates = [
-    { latitude: -23.458165547321727, longitude: -46.52334898494161, name: 'Ecoponto - Paraventi' },
+    { latitude: -23.45709948249857, longitude: -46.556589059335124, name: 'Ecoponto - Torres Tibagy' },
   ];
 
   const visibleMarkers = savedCoordinates.slice(0, 2);
@@ -58,18 +58,18 @@ function ParaventiScreen({ navigation }) {
         </View>
   
         <View style={styles.containertitulo}>
-          <Text style={styles.titulo}>Ecoponto - Paraventi</Text>
+          <Text style={styles.titulo}>Ecoponto - Torres Tibagy</Text>
         </View>
 
         <View style={styles.imagemcontainer}>
-        <Image source={require('../assets/pontos/paraventi.png')} style={styles.imagem} />
+        <Image source={require('../assets/pontos/torrestibagy.png')} style={styles.imagem} />
         </View>
 
         <View style={styles.enderecocontainer}>
         <Text>
           <Text style={styles.enderecotitulo}>Endereço:</Text>
           {' '}
-          <Text style={styles.endereco}> Rua Apolônia Vieira de Jesus, 91 </Text>
+          <Text style={styles.endereco}> Rua Ouvidor, 337 </Text>
         </Text>
         </View>
 
@@ -77,7 +77,7 @@ function ParaventiScreen({ navigation }) {
         <Text>
           <Text style={styles.contatotitulo}>Contato: </Text>
           {' '}
-          <Text style={styles.contato}>(11) 2468-7260</Text>
+          <Text style={styles.contato}>(11) 2468-7206</Text>
         </Text>
         </View>
 
@@ -225,4 +225,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ParaventiScreen;
+export default TorresTibagyScreen;

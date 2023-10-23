@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-function ParaventiScreen({ navigation }) {
+function ContinentalScreen({ navigation }) {
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function ParaventiScreen({ navigation }) {
   }, []);
 
   const savedCoordinates = [
-    { latitude: -23.458165547321727, longitude: -46.52334898494161, name: 'Ecoponto - Paraventi' },
+    { latitude: -23.429494037438868, longitude: -46.55688486769175, name: 'Ecoponto - Continental' },
   ];
 
   const visibleMarkers = savedCoordinates.slice(0, 2);
@@ -58,18 +58,18 @@ function ParaventiScreen({ navigation }) {
         </View>
   
         <View style={styles.containertitulo}>
-          <Text style={styles.titulo}>Ecoponto - Paraventi</Text>
+          <Text style={styles.titulo}>Ecoponto - Continental</Text>
         </View>
 
         <View style={styles.imagemcontainer}>
-        <Image source={require('../assets/pontos/paraventi.png')} style={styles.imagem} />
+        <Image source={require('../assets/pontos/continental.png')} style={styles.imagem} />
         </View>
 
         <View style={styles.enderecocontainer}>
         <Text>
           <Text style={styles.enderecotitulo}>Endereço:</Text>
           {' '}
-          <Text style={styles.endereco}> Rua Apolônia Vieira de Jesus, 91 </Text>
+          <Text style={styles.endereco}> Rua Valdimiro Laurentino Pêssoa, 655 </Text>
         </Text>
         </View>
 
@@ -77,7 +77,7 @@ function ParaventiScreen({ navigation }) {
         <Text>
           <Text style={styles.contatotitulo}>Contato: </Text>
           {' '}
-          <Text style={styles.contato}>(11) 2468-7260</Text>
+          <Text style={styles.contato}>(11) 2468-7206</Text>
         </Text>
         </View>
 
@@ -225,4 +225,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ParaventiScreen;
+export default ContinentalScreen;
